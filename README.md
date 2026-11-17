@@ -2,9 +2,9 @@
 [![rank](https://make.fun/badge/tiny-chess-01/nidieys9-cell/tiny-chess-01/rank.svg)](https://make.fun/bounty/tiny-chess-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
 [![reward](https://make.fun/badge/tiny-chess-01/nidieys9-cell/tiny-chess-01/reward.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
 
-# tiny-chess-01 entry
+# tiny-chess-01 entry (v2)
 
-An original chess engine in a single self-contained `main.py` (4,064 bytes as
+An original chess engine in a single self-contained `main.py` (4,092 bytes as
 committed). The file is an lzma-packed payload with a two-line unpacker, a form
 the rules explicitly allow; the unpacked source is plain Python 3, standard
 library only, and reads no other file.
@@ -14,11 +14,14 @@ How it plays:
 - 0x88 board with a piece list, full legal move generation (castling, en
   passant, promotions), incremental Zobrist hashing and incremental
   material + piece-square evaluation (bishop-pair bonus).
-- Negamax alpha-beta with iterative deepening under a fixed budget of 100,000
+- Negamax alpha-beta with iterative deepening under a fixed budget of 150,000
   nodes per move (quiescence nodes included) — never a clock, so replays are
   move-for-move identical.
-- Quiescence search over captures and promotions, with all evasions when in
-  check; check extensions in the main search.
+- Null-move pruning (guarded: never in check, never after a null move, and
+  only when the side to move still has a non-pawn piece), futility pruning of
+  quiet moves at depths 1–2, and check extensions in the main search.
+- Quiescence search over captures and promotions with delta pruning, and all
+  evasions when in check.
 - Transposition table, MVV-LVA capture ordering, killer moves, and repetition
   scoring that also accounts for the game's earlier positions (seeded from the
   move list the env serves).
