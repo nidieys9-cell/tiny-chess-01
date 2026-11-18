@@ -4,10 +4,11 @@
 
 # tiny-chess-01 entry (v2)
 
-An original chess engine in a single self-contained `main.py` (4,092 bytes as
-committed). The file is an lzma-packed payload with a two-line unpacker, a form
-the rules explicitly allow; the unpacked source is plain Python 3, standard
-library only, and reads no other file.
+An original chess engine in a single self-contained `main.py` (3,357 bytes as
+committed). The file is packed with the kit's `makefun compress` command
+(makefun-compress/v1 stub around an LZMA stream of the readable source), a
+form the rules explicitly allow; the unpacked source is plain Python 3,
+standard library only, and reads no other file.
 
 How it plays:
 
